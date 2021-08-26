@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="StudentModelStoreContainer" CdmEntityContainer="StudentEntities">
+    <EntitySetMapping Name="Grupa">
+      <EntityTypeMapping TypeName="StudentModel.Grupa">
+        <MappingFragment StoreEntitySet="Grupa">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="Grupa1" ColumnName="Grupa" />
+          <ScalarProperty Name="Godina" ColumnName="Godina" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Korisnik">
+      <EntityTypeMapping TypeName="StudentModel.Korisnik">
+        <MappingFragment StoreEntitySet="Korisnik">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="Ime" ColumnName="Ime" />
+          <ScalarProperty Name="Prezime" ColumnName="Prezime" />
+          <ScalarProperty Name="Kurs_id" ColumnName="Kurs_id" />
+          <ScalarProperty Name="Grupa_id" ColumnName="Grupa_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Kurs">
+      <EntityTypeMapping TypeName="StudentModel.Kurs">
+        <MappingFragment StoreEntitySet="Kurs">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="Kurs1" ColumnName="Kurs" />
+          <ScalarProperty Name="Trajanje" ColumnName="Trajanje" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Registracija">
+      <EntityTypeMapping TypeName="StudentModel.Registracija">
+        <MappingFragment StoreEntitySet="Registracija">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="Ime" ColumnName="Ime" />
+          <ScalarProperty Name="Prezime" ColumnName="Prezime" />
+          <ScalarProperty Name="E_mail" ColumnName="E-mail" />
+          <ScalarProperty Name="Telefon" ColumnName="Telefon" />
+          <ScalarProperty Name="Kurs_id" ColumnName="Kurs_id" />
+          <ScalarProperty Name="Grupa_id" ColumnName="Grupa_id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

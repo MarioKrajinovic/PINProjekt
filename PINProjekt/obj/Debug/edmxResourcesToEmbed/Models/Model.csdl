@@ -1,0 +1,119 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="StudentModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Grupa">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Grupa1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Godina" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <NavigationProperty Name="Korisnik" Relationship="Self.FK_Korisnik_Grupa" FromRole="Grupa" ToRole="Korisnik" />
+    <NavigationProperty Name="Registracija" Relationship="Self.FK_Registracija_Grupa" FromRole="Grupa" ToRole="Registracija" />
+  </EntityType>
+  <EntityType Name="Korisnik">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Ime" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Prezime" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Kurs_id" Type="Int32" />
+    <Property Name="Grupa_id" Type="Int32" />
+    <NavigationProperty Name="Grupa" Relationship="Self.FK_Korisnik_Grupa" FromRole="Korisnik" ToRole="Grupa" />
+    <NavigationProperty Name="Kurs" Relationship="Self.FK_Korisnik_Kurs" FromRole="Korisnik" ToRole="Kurs" />
+  </EntityType>
+  <EntityType Name="Kurs">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Kurs1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Trajanje" Type="Int32" />
+    <NavigationProperty Name="Korisnik" Relationship="Self.FK_Korisnik_Kurs" FromRole="Kurs" ToRole="Korisnik" />
+    <NavigationProperty Name="Registracija" Relationship="Self.FK_Registracija_Kurs" FromRole="Kurs" ToRole="Registracija" />
+  </EntityType>
+  <EntityType Name="Registracija">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Ime" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Prezime" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="E_mail" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Telefon" Type="Int32" />
+    <Property Name="Kurs_id" Type="Int32" />
+    <Property Name="Grupa_id" Type="Int32" />
+    <NavigationProperty Name="Grupa" Relationship="Self.FK_Registracija_Grupa" FromRole="Registracija" ToRole="Grupa" />
+    <NavigationProperty Name="Kurs" Relationship="Self.FK_Registracija_Kurs" FromRole="Registracija" ToRole="Kurs" />
+  </EntityType>
+  <Association Name="FK_Korisnik_Grupa">
+    <End Role="Grupa" Type="Self.Grupa" Multiplicity="0..1" />
+    <End Role="Korisnik" Type="Self.Korisnik" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Grupa">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Korisnik">
+        <PropertyRef Name="Grupa_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Registracija_Grupa">
+    <End Role="Grupa" Type="Self.Grupa" Multiplicity="0..1" />
+    <End Role="Registracija" Type="Self.Registracija" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Grupa">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Registracija">
+        <PropertyRef Name="Grupa_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Korisnik_Kurs">
+    <End Role="Kurs" Type="Self.Kurs" Multiplicity="0..1" />
+    <End Role="Korisnik" Type="Self.Korisnik" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Kurs">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Korisnik">
+        <PropertyRef Name="Kurs_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Registracija_Kurs">
+    <End Role="Kurs" Type="Self.Kurs" Multiplicity="0..1" />
+    <End Role="Registracija" Type="Self.Registracija" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Kurs">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Registracija">
+        <PropertyRef Name="Kurs_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="StudentEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Grupa" EntityType="Self.Grupa" />
+    <EntitySet Name="Korisnik" EntityType="Self.Korisnik" />
+    <EntitySet Name="Kurs" EntityType="Self.Kurs" />
+    <EntitySet Name="Registracija" EntityType="Self.Registracija" />
+    <AssociationSet Name="FK_Korisnik_Grupa" Association="Self.FK_Korisnik_Grupa">
+      <End Role="Grupa" EntitySet="Grupa" />
+      <End Role="Korisnik" EntitySet="Korisnik" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Registracija_Grupa" Association="Self.FK_Registracija_Grupa">
+      <End Role="Grupa" EntitySet="Grupa" />
+      <End Role="Registracija" EntitySet="Registracija" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Korisnik_Kurs" Association="Self.FK_Korisnik_Kurs">
+      <End Role="Kurs" EntitySet="Kurs" />
+      <End Role="Korisnik" EntitySet="Korisnik" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Registracija_Kurs" Association="Self.FK_Registracija_Kurs">
+      <End Role="Kurs" EntitySet="Kurs" />
+      <End Role="Registracija" EntitySet="Registracija" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
